@@ -4,6 +4,7 @@
     --gray: #888;
     --gray-light: #CAD6DF;
     --main-color: #F5BE28;
+    --white-color: #fff
 }
 * {
     margin: 0;
@@ -24,6 +25,10 @@ a {
 }
 img {
     max-width: 100%;
+}
+.wrapper {
+    position: relative;
+    overflow-x: hidden;
 }
 .container {
     max-width: 1215px;
@@ -64,6 +69,15 @@ img {
     max-width: 522px;
     margin: auto;
 }
+input[type="submit"] {
+    transition: all 350ms ease-in;
+    border: 1px solid var(--main-color)!important;
+}
+input[type="submit"]:hover {
+    background: transparent!important;
+    border: 1px solid var(--main-color)!important;
+    box-shadow: 0 4px 10px rgba(36,36,36,.12);
+}
 #partners .swiper-button-prev, .swiper-rtl .swiper-button-next {
     left: -50px;
     top: 50%;
@@ -82,7 +96,7 @@ img {
     margin: 0 18px;
 } */
 #testimonials .swiper-button-next, .swiper-rtl .swiper-button-next {
-    right: 300px;
+    left: 35px;
     bottom: -100px;
 }
 .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after,
@@ -93,10 +107,10 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 15.32px 0;
+    margin: 15px 0;
 }
 .header-item__phone div,
-.header-item__features ul:not(.lang) li {
+.header-item__features ul:not(.lang, .mobile-list) li {
     width: 28.85px;
     height: 28.85px;
     border-radius: 50%;
@@ -137,7 +151,7 @@ header {
     line-height: 22px;
     text-transform: uppercase;
 }
-.header-item__features .lang li:after {
+.header-item__features .lang li::after {
     content: '/';
     padding: 0 3px;
 }
@@ -153,6 +167,80 @@ header {
 }
 .header-item__features .menubar {
     margin-left: 10px;
+    cursor: pointer;
+}
+.wrapper .mobile-menu {
+    background-color: #ffffffed;
+    padding: 170px 70px 0 88px;
+    position: fixed;
+    right: -338px;
+    top: 0;
+    height: 100%;
+    transition: all 350ms ease-in;
+    z-index: 99;
+}
+.wrapper .mobile-menu.active-menu {
+    right: 0;
+}
+.wrapper .mobile-menu .mobile-cross {
+    /* pointer-events: none; */
+    cursor: pointer;
+    /* content: url(./img/cross.svg); */
+    position: absolute;
+    top: 45px;
+    right: 75px;
+}
+.wrapper .mobile-menu .mobile-list li {
+    border-bottom: 1px solid #C1C1C1;
+    width: 180px;
+    text-align: right;
+    padding-bottom: 35px;
+    margin-bottom: 35px;
+}
+.wrapper .mobile-menu .mobile-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 70px;
+}
+.wrapper .mobile-menu .mobile-list li:after {
+    content: url(./img/arrow-menu.svg);
+    padding-left: 18px;
+}
+.wrapper .mobile-menu .mobile-list li a.active {
+    font-weight: 800;
+    color: var(--black-strong);
+    margin-right: 18px;
+}
+.wrapper .mobile-menu .mobile-list li:after a.active {
+    content: none;
+}
+.wrapper .mobile-menu .mobile-list li a {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    text-transform: uppercase;
+    color: #444444;
+}
+.fixed_stick {
+    position: fixed;
+    width: 100%;
+    top: -15px;
+    padding: 15px 0;
+    z-index: 11;
+    background: hsla(0, 0%, 100%, 0.85);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    animation: upper_down 0.9s;
+    box-shadow: 0px 10px 50px rgb(0 66 131 / 10%);
+}
+@keyframes upper_down {
+    0% {
+      transform: translateY(-100px);
+    }
+    100% {
+      transform: translateY(0);
+    }
 }
 #banner {
     background: url('img/strips.png') var(--main-color);
@@ -187,11 +275,11 @@ header {
     padding: 0px 40px 22px 55px;
     margin-top: -78px;
 }
-#offer .col-lg-4 {
+#offer [class^="col-"] {
     border-right: 1px solid var(--gray-light);
     padding-bottom: 25px;
 }
-#offer .col-lg-4:last-child {
+#offer .col-md-4:last-child {
     border-right: 1px solid transparent;
 }
 #offer .offer-top__item {
@@ -212,17 +300,21 @@ header {
 }
 #offer .offer-top__item p {
     margin-left: 40px;
-    font-family: Gilroy;
+    font-family: 'Gilroy';
     font-size: 20px;
     font-weight: 600;
     line-height: 24px;
 }
 #offer .offer-top__item .offer-subtext {
-    font-family: Gilroy;
+    width: 100%;
+    font-family: 'Gilroy';
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
-    color: #8C8989
+    margin-top: 10px;
+    color: #8C8989;
+    border: none;
+    outline: none;
 }
 #offer .offer-top {
     border-bottom: 1px solid var(--gray-light);
@@ -232,12 +324,14 @@ header {
 }
 #offer .offer-bottom input,
 #offer .offer-bottom select {
+    width: 100%;
     font-family: 'Gilroy';
     background: #F4F3F3;
     border-radius: 50px;
     padding: 15px 20px;
     border: 0;
     width: 100%;
+    outline: 0;
 }
 #offer .offer-bottom input[type="submit"] {
     background: var(--main-color);
@@ -270,6 +364,7 @@ header {
     text-align: center;
     text-transform: uppercase;
     margin: 17px 0 12px;
+    height: 60px;
 }
 #advantage .advantage-item p {
     font-family: Open Sans;
@@ -320,6 +415,13 @@ header {
 }
 .services-more {
     margin-top: 62px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 500ms ease-in-out;
+}
+#services .services-item__service.service-1:hover .services-more {
+    opacity: 1;
+    visibility: visible;
 }
 .services-big__one {
     flex-direction: column;
@@ -469,7 +571,7 @@ header {
 #testimonials {
     margin-top: 95px;
 }
-#testimonials .testimonials-item__text {
+#testimonials .testimonials-item__text p {
     max-width: 364px;
 }
 #testimonials .testimonials-item__slider img:first-of-type {
@@ -564,21 +666,44 @@ footer .footer-bottom .footer-item__copyright p {
 footer .footer-bottom .footer-item__copyright p:first-child {
     text-transform: uppercase;
 }
+#partners .swiper-pagination {
+    bottom: -35px;
+}
+@media (min-width: 1366px) {
+    .swiper-pagination {
+        display: none;
+    }
+}
+@media (max-width: 1365px) {
+    .swiper-button-prev2,
+    .swiper-button-next2 {
+        display: none;
+    }
+}
+@media (min-width: 780px) and (max-width: 1199px) {
+    #advantage .advantage-item p {
+        height: 96px;
+    }
+}
 @media (max-width: 1199px) {
     .container {
         padding: 0 40px
     }
-}
-@media (max-width: 991px) {
     #advantage .advantage-item {
         margin-bottom: 20px;
     }
+    #about .about-item__text .title + p,
+    #testimonials .testimonials-item__text p {
+        max-width: 100%;
+    }
+}
+@media (max-width: 991px) {
     #banner .banner-text {
         max-width: unset;
     }
     #banner .banner-img,
-    #cta .cta-item__img,
-    #testimonials .testimonials-item__slider {
+    #cta .cta-item__img
+    /* #testimonials .testimonials-item__slider */ {
         display: none!important;
     }
     #offer .col-lg-4 {
@@ -588,6 +713,7 @@ footer .footer-bottom .footer-item__copyright p:first-child {
         margin-bottom: 20px;
     }
     .services .service-1 {
+        height: 270px;
         margin-bottom: 30px;
     }
     #cta {
@@ -615,6 +741,14 @@ footer .footer-bottom .footer-item__copyright p:first-child {
     footer .footer-top ul {
         margin-bottom: 30px;
     }
+    .header-item.header-item__phone a {
+        font-size: 16px;
+    }
+}
+@media (max-width: 782px) {
+    #offer [class^="col-"] {
+        border: none;
+    }
 }
 @media (max-width: 767px) {
     #cta .cta-item__form .input-flex {
@@ -627,6 +761,18 @@ footer .footer-bottom .footer-item__copyright p:first-child {
         text-align: center;
         margin-top: 20px;
     }
+    .header-item.header-item__phone a {
+        font-size: 12px;
+    }
+    header .header-item.header-item__features .socials {
+        display: none!important;
+    }
+    section {
+        margin: 35px 0!important;
+    }
+    .wrapper .mobile-menu {
+        padding-top: 100px;
+    }
 }
 @media (max-width: 575px) {
     header .header-item {
@@ -635,11 +781,14 @@ footer .footer-bottom .footer-item__copyright p:first-child {
     header .header-item__logo {
         margin: 20px 0;
     }
+    header [class^="col-xs"] {
+        width: 50%;
+    }
     #banner .banner-text h1 {
         font-size: 45px;
     }
     #services .services .services-item__service p {
-        font-size: 20px;
+        font-size: 16px;
     }
     h3.title {
         font-size: 34px!important;
@@ -653,5 +802,8 @@ footer .footer-bottom .footer-item__copyright p:first-child {
     }
     #offer .offer-box {
         padding: 20px;
+    }
+    .header-item.header-item__phone a {
+        font-size: 16px;
     }
 }
