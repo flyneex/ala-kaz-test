@@ -29,14 +29,30 @@ window.addEventListener('scroll', () => {
 })
 
 const swiper = new Swiper('.swiper-testimonials', {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: false,
+    slidesPerView: "auto",
+    coverflowEffect: {
+      rotate: 10,
+      stretch: 530,
+      depth: 80,
+      scale: 1,
+      modifier: 1,
+      slideShadows: false,
+    },
+    slidesPerView: 1,
     direction: 'horizontal',
     loop: true,
-    autoplay: {
-    delay: 3000
-    },
+    // autoplay: {
+    // delay: 3000
+    // },
     navigation: {
       nextEl: '.swiper-button-next1',
       prevEl: '.swiper-button-prev1',
+    },
+    pagination: {
+      el: ".swiper-pagination",
     },
   });
 
